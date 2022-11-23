@@ -1,0 +1,19 @@
+{{- if .Values.ingress.enabled -}}
+{{- $fullName := include "resourcesserver.fullname" . -}}
+  {{- if .Values.ingress.tls }}
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata: 
+  name: {{ .Values.ingress.annotations.cert-manager.io/cluster-issuer }}
+spec: 
+  acme: 
+    server: {{ .Values.certificationServer }}
+    email: {{ .Values.email }}
+    privateKeySecretRef: 
+      name: {{ .Values.ingress.annotations.cert-manager.io/cluster-issuer }}
+    solvers:
+    - http01:
+        ingress:
+          name: {{ include "resourcesserver.fullname" . }}
+    {{- end }}
+{{- end }}

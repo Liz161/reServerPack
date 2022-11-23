@@ -1,0 +1,77 @@
+# cluster role to allow get lists of pods, services and namespaces
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: lists
+rules:
+- apiGroups: [""]
+  resources: ["pods","services","namespaces"]
+  verbs: ["list"]
+
+---
+# binding the pods, services and namespaces list role to serviceaccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: lists
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: lists
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# cluster role to allow get lists of deployments
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deployment-lists
+rules:
+- apiGroups: ["apps"]
+  resources: ["deployments"]
+  verbs: ["list"]
+
+---
+# binding the deployments list role to serviceaccount
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: deployment-lists
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: deployment-lists
+  apiGroup: rbac.authorization.k8s.io
+
+# ---
+# # allow grabing metrics from within the cluster
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRole
+# metadata:
+#   name: prometheus
+# rules:
+#   - nonResourceURLs:
+#       - "/metrics"
+#     verbs:
+#       - get
+
+# ---
+# # binding the grab metrics role to serviceaccount
+# apiVersion: rbac.authorization.k8s.io/v1
+# kind: ClusterRoleBinding
+# metadata:
+#   name: prometheus
+# subjects:
+# - kind: ServiceAccount
+#   name: default
+#   namespace: default
+# roleRef:
+#   kind: ClusterRole
+#   name: prometheus
+#   apiGroup: rbac.authorization.k8s.io
