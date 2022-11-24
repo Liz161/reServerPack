@@ -78,7 +78,7 @@ The following table lists the configurable parameters of the web server chart an
 | ingress.enabled                |                                                                               |false
 | ingress.className              | |"nginx"
 | ingress.annotations            |   there is cluster issuer within this chart in case of tls <br />is not empty and ingres enabled certificate and secret will be created (depends on cert manager helm chart) |{}
-| ingress.hosts                  |   list of hosts                                                               |   ```bash - host: web-server.local <br /> paths: - path: / pathType: Prefix```
+| ingress.hosts                  |   list of hosts                                                               |   ``` - host: web-server.local/ paths: - path: / pathType: Prefix```
 | ingress.tls:                   |   if tls will be generated it is required to untag the "cert-manager.io/cluster-issuer: letsencrypt" annotat |[]
 | certificationServer            |   in case of certification required |https://acme-v02.api.letsencrypt.org/directory
 | email                          |   in case of certification required |example@domain.com
