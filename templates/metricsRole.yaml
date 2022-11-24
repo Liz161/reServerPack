@@ -1,4 +1,4 @@
-{{- if .Values.metricsrols.enabled -}}
+{{- if .Values.Roles.metrics.enabled -}}
 apiVersion: v1
 kind: ServiceAccount
 metadata:
