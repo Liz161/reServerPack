@@ -29,7 +29,8 @@ and run any of the required get commands with curl, /namespaces, /services_<name
 
 #### To install the chart with the release name my-release:
 
-**IMPORTANT**: if you do not run on GKE and you want to monitor the app, it is required to allow the metricsrols.enabled on the values.yaml file
+**IMPORTANT**: if you do not run on GKE and you want to monitor the app, it is required to allow the Roles.metrics.enabled on the values.yaml file
+**IMPORTANT**: in case of an existence cluster role you need to unable the Roles.ClusterRecourses.enabled on the values.yaml file
 
 **Kubernetes** Recources web server Helm chart
 
@@ -61,6 +62,7 @@ The following table lists the configurable parameters of the web server chart an
 
 | Parameter | Description     | Default                |
 | :-------- | :------- | :------------------------- |
+| Roles.ClusterRecourses.enabled | enable the option to get the resources information from within the cluster| true|
 | image.repository               | |gcr.io/the-delight-365908/resources-server
 | replicaCount                   | |2
 | image.tag                      | |1
@@ -90,7 +92,7 @@ The following table lists the configurable parameters of the web server chart an
 | autoscaling.minReplicas        | |1
 | autoscaling.maxReplicas        | |100
 | autoscaling.targetCPUUtilizationPercentage | |80
-| metricsrols.enabled            | |false
+| Roles.metrics.enabled          | enables the option to grab metrics from the app |false
 
 
 Specify each parameter using the --set key=value[,key=value] argument to helm install.
